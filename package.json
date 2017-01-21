@@ -1,0 +1,33 @@
+{
+  "name": "server-lite",
+  "version": "1.0.0",
+  "description": "Lightweight web server for node projects",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "npm run unitTest && npm run intTest",
+    "unitTest": "mocha --recursive test/unit/",
+    "intTest": "mocha --recursive test/integration/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/MaddHacker/server-lite.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MaddHacker/server-lite/issues",
+    "email": "hacker@maddhacker.com"
+  },
+  "keywords": [
+    "logging",
+    "output",
+    "log"
+  ],
+  "author": "MaddHacker <hacker@maddhacker.com> (http://www.maddhacker.com)",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/MaddHacker/server-lite#readme",
+  "dependencies": {
+    "output-manager": "^1.0.1"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  }
+}

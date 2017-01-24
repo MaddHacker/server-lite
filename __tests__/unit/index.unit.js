@@ -16,12 +16,10 @@
 
 'use strict';
 
-const assert = require('assert');
-
-describe('Content (Integration)', function () {
+describe('Index (Unit)', function () {
     describe('TBD', function () {
-        it('no integration tests needed yet', function () {
-            assert(true);
+        it('no unit tests yet', function () {
+            expect(true).toBe(true);
         });
     });
 });

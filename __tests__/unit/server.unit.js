@@ -16,12 +16,10 @@
 
 'use strict';
 
-const assert = require('assert');
-
-describe('Content (Unit)', function () {
+describe('Server (Unit)', function () {
     describe('TBD', function () {
         it('no unit tests yet', function () {
-            assert(true);
+            expect(true).toBe(true);
         });
     });
 });

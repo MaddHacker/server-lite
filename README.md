@@ -4,7 +4,7 @@ Some info goes here
 ## The Fun Stuff
 [![Build Status](https://secure.travis-ci.org/MaddHacker/server-lite.svg?branch=master)](http://travis-ci.org/MaddHacker/server-lite)
 
-[![Dependency Status](https://david-dm.org/MaddHacker/server-lite.svg)](https://david-dm.org/MaddHacker/server-lite)
+[![Dependency Status](https://david-dm.org/MaddHacker/server-lite/status.svg)](https://david-dm.org/MaddHacker/server-lite)
 
 [![npm Version](https://badge.fury.io/js/server-lite.svg)](https://badge.fury.io/js/server-lite)
 

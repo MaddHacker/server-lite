@@ -11,7 +11,6 @@ Some info goes here
 [![Test Coverage](https://codeclimate.com/github/MaddHacker/server-lite/badges/coverage.svg)](https://codeclimate.com/github/MaddHacker/server-lite/coverage)
 
 [![Dependency Status](https://david-dm.org/MaddHacker/server-lite/status.svg)](https://david-dm.org/MaddHacker/server-lite)
-  [Dependency Status](https://david-dm.org/MaddHacker/server-lite)
 
 [![npm Version](https://badge.fury.io/js/server-lite.svg)](https://badge.fury.io/js/server-lite)
 

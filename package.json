@@ -15,9 +15,9 @@
     "email": "hacker@maddhacker.com"
   },
   "keywords": [
-    "logging",
-    "output",
-    "log"
+    "server",
+    "web server",
+    "webserver"
   ],
   "author": "MaddHacker <hacker@maddhacker.com> (http://www.maddhacker.com)",
   "license": "Apache-2.0",

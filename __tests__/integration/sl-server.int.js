@@ -16,9 +16,11 @@
 
 'use strict';
 
-describe('Content (Unit)', function () {
+const svr = require('../../lib/sl-server');
+
+describe('sl-server (Integration)', function () {
     describe('TBD', function () {
-        it('no unit tests yet', function () {
+        it('no integration tests needed yet', function () {
             expect(true).toBe(true);
         });
     });

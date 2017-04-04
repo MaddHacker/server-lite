@@ -16,9 +16,11 @@
 
 'use strict';
 
-describe('Server (Unit)', function () {
+const config = require('../../lib/sl-config');
+
+describe('sl-config (Integration)', function () {
     describe('TBD', function () {
-        it('no unit tests yet', function () {
+        it('no integration tests needed yet', function () {
             expect(true).toBe(true);
         });
     });

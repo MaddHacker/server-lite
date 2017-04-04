@@ -16,9 +16,11 @@
 
 'use strict';
 
-describe('Index (Unit)', function () {
+const con = require('../../lib/sl-content');
+
+describe('Content (Integration)', function () {
     describe('TBD', function () {
-        it('no unit tests yet', function () {
+        it('no integration tests needed yet', function () {
             expect(true).toBe(true);
         });
     });

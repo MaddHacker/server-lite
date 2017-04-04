@@ -42,48 +42,48 @@ class Response {
     }
 }
 
-describe('sl-utils (Unit)', function () {
-    describe('Check errStr', function () {
-        it('should return a sensible string', function () {
+describe('sl-utils (Unit)', () => {
+    describe('Check errStr', () => {
+        it('should return a sensible string', () => {
             expect(utilz.errStr({ name: 'hi', message: 'bob' })).toBe('hi - bob');
         });
     });
-    describe('Check buildFromFilePath', function () {
-        it('should handle known strings (xml)', function () {
+    describe('Check buildFromFilePath', () => {
+        it('should handle known strings (xml)', () => {
             let tmpCon = utilz.buildFromFilePath('docs/latest/wizard.xml', 'data');
             expect(tmpCon).not.toBe(null);
             expect(tmpCon.type).toBe('application/xml; charset=utf-8');
             expect(tmpCon.length).toBe(4);
         });
-        it('should handle known strings (js)', function () {
+        it('should handle known strings (js)', () => {
             let tmpCon = utilz.buildFromFilePath('scripts/raw/fun.min.js', 'data');
             expect(tmpCon).not.toBe(null);
             expect(tmpCon.type).toBe('application/javascript; charset=utf-8');
             expect(tmpCon.length).toBe(4);
         });
-        it('should handle unknown strings (boo)', function () {
+        it('should handle unknown strings (boo)', () => {
             let tmpCon = utilz.buildFromFilePath('ghost/says.boo', 'data');
             expect(tmpCon).not.toBe(null);
             expect(tmpCon.type).toBe('application/octet-stream; charset=utf-8');
             expect(tmpCon.length).toBe(4);
         });
     });
-    describe('Check loadDataFromFile', function () {
-        it('should throw an error when a file does not exist', function () {
+    describe('Check loadDataFromFile', () => {
+        it('should throw an error when a file does not exist', () => {
             utilz.loadDataFromFile('unreadable.bin').then(
                 () => { throw Error('should not be sucessful'); },
                 (err) => { expect(err).not.toBe(null); },
                 () => { throw Error('should not have tried to read it'); });
         });
-        it('should be able to load a file', function () {
+        it('should be able to load a file', () => {
             utilz.loadDataFromFile('.gitignore').then(
                 (data) => { expect(stringz.startsWith(data, 'node_modules')).toBe(true); },
                 (err) => { throw Error('should not have been able to read or find it'); },
                 (err) => { throw Error('should not have tried to read it'); });
         });
     });
-    describe('Check respondWithFileFromPath', function () {
-        it('should return a 404 when a file does not exist', function () {
+    describe('Check respondWithFileFromPath', () => {
+        it('should return a 404 when a file does not exist', () => {
             let myResponse = new Response();
             utilz.respondWithFileFromPath('unreadable.bin', myResponse);
             out.i(JSON.stringify(myResponse._head));
@@ -95,7 +95,7 @@ describe('sl-utils (Unit)', function () {
             // expect(stringz.startsWith(myResponse._content, 'File at')).toBe(true);
             // expect(myResponse._encoding).toBe('utf-8');
         });
-        it('should be able to load a file', function () {
+        it('should be able to load a file', () => {
             let myResponse = new Response();
             utilz.respondWithFileFromPath('.gitignore', myResponse);
             expect(myResponse._head).not.toBe(null);
@@ -107,8 +107,8 @@ describe('sl-utils (Unit)', function () {
             // expect(myResponse._encoding).toBe('utf-8');
         });
     });
-    describe('Check writeResponse', function () {
-        it('should handle good input', function () {
+    describe('Check writeResponse', () => {
+        it('should handle good input', () => {
             let myResponse = new Response();
             utilz.writeResponse(myResponse, 200, con.text('say hi'));
             expect(myResponse._head).not.toBe(null);
@@ -121,7 +121,7 @@ describe('sl-utils (Unit)', function () {
             expect(myResponse._content).toBe('say hi');
             expect(myResponse._encoding).toBe('utf-8');
         });
-        it('should be able to handle no status', function () {
+        it('should be able to handle no status', () => {
             let myResponse = new Response();
             utilz.writeResponse(myResponse, null, con.text('say hi'));
             expect(myResponse._head).not.toBe(null);
@@ -134,7 +134,7 @@ describe('sl-utils (Unit)', function () {
             expect(myResponse._content).toBe('say hi');
             expect(myResponse._encoding).toBe('utf-8');
         });
-        it('should be able to handle no content', function () {
+        it('should be able to handle no content', () => {
             let myResponse = new Response();
             utilz.writeResponse(myResponse, 404, null);
             expect(myResponse._head).not.toBe(null);

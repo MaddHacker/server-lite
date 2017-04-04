@@ -40,34 +40,34 @@ class MockSvr {
     }
 }
 
-describe('sl-server (Unit)', function () {
-    describe('Check slServer', function () {
+describe('sl-server (Unit)', () => {
+    describe('Check slServer', () => {
         let tmpSvr = new svr.slServer();
-        it('should use default slConfig', function () {
+        it('should use default slConfig', () => {
             expect(tmpSvr._config).not.toBe(null);
             expect(tmpSvr._config.listenOptions.port).toBe(5000);
         });
-        it('should have the server object set to null', function () {
+        it('should have the server object set to null', () => {
             expect(tmpSvr.server).toBe(null);
         });
 
         let mySvr = new MockSvr();
-        it('should have a MockSvr', function () {
+        it('should have a MockSvr', () => {
             expect(JSON.stringify(mySvr.actions)).toBe(JSON.stringify({}));
             expect(mySvr.listenOpts).toBe(null);
             expect(mySvr.listenFxn).toBe(null);
             expect(mySvr.closeCalled).toBe(false);
         });
 
-        it('should set server object when started', function () {
+        it('should set server object when started', () => {
             tmpSvr._start(mySvr);
             expect(tmpSvr.server).not.toBe(null);
             expect(tmpSvr.server instanceof MockSvr).toBe(true);
         });
-        it('should not set closeCalled', function () {
+        it('should not set closeCalled', () => {
             expect(mySvr.closeCalled).toBe(false);
         });
-        it('should setup all mock actions (and they should be Functions)', function () {
+        it('should setup all mock actions (and they should be Functions)', () => {
             expect(mySvr.actions.checkContinue).not.toBe(null);
             expect(mySvr.actions.checkContinue instanceof Function).toBe(true);
             expect(mySvr.actions.checkExpectation).not.toBe(null);
@@ -85,44 +85,44 @@ describe('sl-server (Unit)', function () {
             expect(mySvr.actions.upgrade).not.toBe(null);
             expect(mySvr.actions.upgrade instanceof Function).toBe(true);
         });
-        it('should have set the listenFxn (and it should be a Function)', function () {
+        it('should have set the listenFxn (and it should be a Function)', () => {
             expect(mySvr.listenFxn).not.toBe(null);
             expect(mySvr.listenFxn instanceof Function).toBe(true);
         });
-        it('should have set the listenOpts', function () {
+        it('should have set the listenOpts', () => {
             expect(mySvr.listenOpts).not.toBe(null);
         });
-        it('should be using port 5000', function () {
+        it('should be using port 5000', () => {
             expect(mySvr.listenOpts.port).toBe(5000);
         });
-        it('should set closeCalled when close is called', function () {
+        it('should set closeCalled when close is called', () => {
             tmpSvr.stop();
             expect(mySvr.closeCalled).toBe(true);
         });
     });
-    describe('Check slHttpServer', function () {
-        it('should be an instanceof slServer', function () {
+    describe('Check slHttpServer', () => {
+        it('should be an instanceof slServer', () => {
             expect((new svr.slHttp()) instanceof svr.slServer).toBe(true);
         });
         let tmpSvr = new svr.slHttp();
-        it('should use default slConfig', function () {
+        it('should use default slConfig', () => {
             expect(tmpSvr._config).not.toBe(null);
             expect(tmpSvr._config.listenOptions.port).toBe(5000);
         });
-        it('should have the server object set to null', function () {
+        it('should have the server object set to null', () => {
             expect(tmpSvr.server).toBe(null);
         });
     });
-    describe('Check slHttpsServer', function () {
-        it('should be an instanceof slServer', function () {
+    describe('Check slHttpsServer', () => {
+        it('should be an instanceof slServer', () => {
             expect((new svr.slHttps()) instanceof svr.slServer).toBe(true);
         });
         let tmpSvr = new svr.slHttps();
-        it('should use default slConfig', function () {
+        it('should use default slConfig', () => {
             expect(tmpSvr._config).not.toBe(null);
             expect(tmpSvr._config.listenOptions.port).toBe(5000);
         });
-        it('should have the server object set to null', function () {
+        it('should have the server object set to null', () => {
             expect(tmpSvr.server).toBe(null);
         });
     });

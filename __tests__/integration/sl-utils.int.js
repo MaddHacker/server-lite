@@ -18,9 +18,9 @@
 
 const utilz = require('../../lib/sl-utils');
 
-describe('sl-utils (Integration)', function () {
-    describe('TBD', function () {
-        it('no integration tests needed yet', function () {
+describe('sl-utils (Integration)', () => {
+    describe('TBD', () => {
+        it('no integration tests needed yet', () => {
             expect(true).toBe(true);
         });
     });

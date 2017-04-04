@@ -18,9 +18,9 @@
 
 const con = require('../../lib/sl-content');
 
-describe('Content (Integration)', function () {
-    describe('TBD', function () {
-        it('no integration tests needed yet', function () {
+describe('Content (Integration)', () => {
+    describe('TBD', () => {
+        it('no integration tests needed yet', () => {
             expect(true).toBe(true);
         });
     });

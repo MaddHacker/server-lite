@@ -21,111 +21,111 @@ const con = require('../../lib/sl-content');
 const typeCharset = '; charset=utf-8';
 const elo = 'hello';
 
-describe('Content (Unit)', function () {
-    describe('Generic binary objects', function () {
+describe('Content (Unit)', () => {
+    describe('Generic binary objects', () => {
         let bin = con.binary(elo);
-        it('should not be null', function () {
+        it('should not be null', () => {
             expect(bin).not.toBe(null);
         });
-        it('should be of type application/octet-stream', function () {
+        it('should be of type application/octet-stream', () => {
             expect(bin.type).toBe('application/octet-stream' + typeCharset);
         });
-        it('should set value correctly', function () {
+        it('should set value correctly', () => {
             expect(bin.value).toBe(elo);
         });
-        it('should have correct length', function () {
+        it('should have correct length', () => {
             expect(bin.length).toBe(elo.length);
         });
     });
-    describe('Generic text objects', function () {
+    describe('Generic text objects', () => {
         let txt = con.text(elo);
-        it('should not be null', function () {
+        it('should not be null', () => {
             expect(txt).not.toBe(null);
         });
-        it('should be of type text/plain', function () {
+        it('should be of type text/plain', () => {
             expect(txt.type).toBe('text/plain' + typeCharset);
         });
-        it('should set value correctly', function () {
+        it('should set value correctly', () => {
             expect(txt.value).toBe(elo);
         });
-        it('should have correct length', function () {
+        it('should have correct length', () => {
             expect(txt.length).toBe(elo.length);
         });
     });
-    describe('Generic custom objects', function () {
+    describe('Generic custom objects', () => {
         let ctm = con.custom('bob/frank', elo);
-        it('should not be null', function () {
+        it('should not be null', () => {
             expect(ctm).not.toBe(null);
         });
-        it('should be of type bob/frank', function () {
+        it('should be of type bob/frank', () => {
             expect(ctm.type).toBe('bob/frank' + typeCharset);
         });
-        it('should set value correctly', function () {
+        it('should set value correctly', () => {
             expect(ctm.value).toBe(elo);
         });
-        it('should have correct length', function () {
+        it('should have correct length', () => {
             expect(ctm.length).toBe(elo.length);
         });
     });
-    describe('Check find by extension (xml)', function () {
+    describe('Check find by extension (xml)', () => {
         let xml = con.byExtension('xml', elo);
-        it('should not be null', function () {
+        it('should not be null', () => {
             expect(xml).not.toBe(null);
         });
-        it('should be of type application/xml', function () {
+        it('should be of type application/xml', () => {
             expect(xml.type).toBe('application/xml' + typeCharset);
         });
-        it('should set value correctly', function () {
+        it('should set value correctly', () => {
             expect(xml.value).toBe(elo);
         });
-        it('should have correct length', function () {
+        it('should have correct length', () => {
             expect(xml.length).toBe(elo.length);
         });
     });
-    describe('Check find by extension (js)', function () {
+    describe('Check find by extension (js)', () => {
         let js = con.byExtension('js', elo);
-        it('should not be null', function () {
+        it('should not be null', () => {
             expect(js).not.toBe(null);
         });
-        it('should be of type application/javascript', function () {
+        it('should be of type application/javascript', () => {
             expect(js.type).toBe('application/javascript' + typeCharset);
         });
-        it('should set value correctly', function () {
+        it('should set value correctly', () => {
             expect(js.value).toBe(elo);
         });
-        it('should have correct length', function () {
+        it('should have correct length', () => {
             expect(js.length).toBe(elo.length);
         });
     });
-    describe('Check find by extension (css)', function () {
+    describe('Check find by extension (css)', () => {
         let css = con.byExtension('css', elo);
-        it('should not be null', function () {
+        it('should not be null', () => {
             expect(css).not.toBe(null);
         });
-        it('should be of type text/css', function () {
+        it('should be of type text/css', () => {
             expect(css.type).toBe('text/css' + typeCharset);
         });
-        it('should set value correctly', function () {
+        it('should set value correctly', () => {
             expect(css.value).toBe(elo);
         });
-        it('should have correct length', function () {
+        it('should have correct length', () => {
             expect(css.length).toBe(elo.length);
         });
     });
-    // describe('Check all extensions', function () {
+    // describe('Check all extensions', ()=>{
     //     for (let ext in con.mimeTypes) {
     //         let tmp = con.byExtension(ext, elo);
     //         let expectedType = con.mimeTypes[ext];
-    //         it(ext + ' should not be null', function () {
+    //         it(ext + ' should not be null', ()=>{
     //             expect(tmp).not.toBe(null);
     //         });
-    //         it(ext + ' should be of type ' + expectedType, function () {
+    //         it(ext + ' should be of type ' + expectedType, ()=>{
     //             expect(tmp.type).toBe(expectedType + typeCharset);
     //         });
-    //         it(ext + ' should set value correctly', function () {
+    //         it(ext + ' should set value correctly', ()=>{
     //             expect(tmp.value).toBe(elo);
     //         });
-    //         it(ext + ' should have correct length', function () {
+    //         it(ext + ' should have correct length', ()=>{
     //             expect(tmp.length).toBe(elo.length);
     //         });
     //     }

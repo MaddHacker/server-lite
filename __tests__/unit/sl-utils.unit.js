@@ -83,28 +83,41 @@ describe('sl-utils (Unit)', () => {
         });
     });
     describe('Check respondWithFileFromPath', () => {
-        it('should return a 404 when a file does not exist', () => {
+        it('should return a 404 when a file does not exist', (done) => {
             let myResponse = new Response();
-            utilz.respondWithFileFromPath('unreadable.bin', myResponse);
-            out.i(JSON.stringify(myResponse._head));
-            expect(myResponse._head).not.toBe(null);
-            // expect(myResponse._head['Server']).toBe('server-lite');
-            // expect(myResponse._head['Content-Language']).toBe('en');
-            // expect(myResponse._head['Content-Type']).toBe('text/plain');
-            // expect(myResponse._statusCode).toBe(404);
-            // expect(stringz.startsWith(myResponse._content, 'File at')).toBe(true);
-            // expect(myResponse._encoding).toBe('utf-8');
+            utilz.respondWithFileFromPath('doesnotexist.bin', myResponse);
+            expect(myResponse._statusCode).toBe(0);
+            function checkResponse() {
+                if (myResponse._statusCode == 0) { setTimeout(checkResponse, 500); }
+                else {
+                    expect(myResponse._head['Server']).toBe('server-lite');
+                    expect(myResponse._head['Content-Language']).toBe('en');
+                    expect(myResponse._head['Content-Type']).toBe('text/plain; charset=utf-8');
+                    expect(myResponse._statusCode).toBe(404);
+                    expect(stringz.startsWith(myResponse._content, 'File at')).toBe(true);
+                    expect(myResponse._encoding).toBe('utf-8');
+                    done();
+                }
+            }
+            checkResponse();
         });
-        it('should be able to load a file', () => {
+        it('should be able to load a file', (done) => {
             let myResponse = new Response();
             utilz.respondWithFileFromPath('.gitignore', myResponse);
-            expect(myResponse._head).not.toBe(null);
-            // expect(myResponse._head['Server']).toBe('server-lite');
-            // expect(myResponse._head['Content-Language']).toBe('en');
-            // expect(myResponse._head['Content-Type']).toBe('application/octet-stream');
-            // expect(myResponse._statusCode).toBe(200);
-            // expect(stringz.startsWith(myResponse._content, 'node_modules')).toBe(true);
-            // expect(myResponse._encoding).toBe('utf-8');
+            expect(myResponse._statusCode).toBe(0);
+            function checkResponse() {
+                if (myResponse._statusCode == 0) { setTimeout(checkResponse, 500); }
+                else {
+                    expect(myResponse._head['Server']).toBe('server-lite');
+                    expect(myResponse._head['Content-Language']).toBe('en');
+                    expect(myResponse._head['Content-Type']).toBe('application/octet-stream; charset=utf-8');
+                    expect(myResponse._statusCode).toBe(200);
+                    expect(stringz.startsWith(myResponse._content.toString('utf8'), 'node_modules')).toBe(true);
+                    expect(myResponse._encoding).toBe('utf-8');
+                    done();
+                }
+            }
+            checkResponse();
         });
     });
     describe('Check writeResponse', () => {

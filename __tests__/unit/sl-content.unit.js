@@ -112,22 +112,22 @@ describe('Content (Unit)', () => {
             expect(css.length).toBe(elo.length);
         });
     });
-    // describe('Check all extensions', ()=>{
-    //     for (let ext in con.mimeTypes) {
-    //         let tmp = con.byExtension(ext, elo);
-    //         let expectedType = con.mimeTypes[ext];
-    //         it(ext + ' should not be null', ()=>{
-    //             expect(tmp).not.toBeNull();
-    //         });
-    //         it(ext + ' should be of type ' + expectedType, ()=>{
-    //             expect(tmp.type).toBe(expectedType + typeCharset);
-    //         });
-    //         it(ext + ' should set value correctly', ()=>{
-    //             expect(tmp.value).toBe(elo);
-    //         });
-    //         it(ext + ' should have correct length', ()=>{
-    //             expect(tmp.length).toBe(elo.length);
-    //         });
-    //     }
-    // });
+    describe('Check all extensions', () => {
+        for (let ext in con.mimeTypes) {
+            let tmp = con.byExtension(ext, elo);
+            let expectedType = con.mimeTypes[ext];
+            it(ext + ' should not be null', () => {
+                expect(tmp).not.toBeNull();
+            });
+            it(ext + ' should be of type ' + expectedType, () => {
+                expect(tmp.type).toBe(expectedType + typeCharset);
+            });
+            it(ext + ' should set value correctly', () => {
+                expect(tmp.value).toBe(elo);
+            });
+            it(ext + ' should have correct length', () => {
+                expect(tmp.length).toBe(elo.length);
+            });
+        }
+    });
 });

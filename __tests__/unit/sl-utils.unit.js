@@ -93,7 +93,7 @@ describe('sl-utils (Unit)', () => {
             let myResponse = new Response();
             utilz.respondWithFileFromPath('doesnotexist.bin', myResponse);
             expect(myResponse._statusCode).toBe(0);
-            function checkResponse() {
+            let checkResponse = () => {
                 if (myResponse._statusCode == 0) { setTimeout(checkResponse, 500); }
                 else {
                     expect(myResponse._head['Server']).toBe('server-lite');
@@ -111,7 +111,7 @@ describe('sl-utils (Unit)', () => {
             let myResponse = new Response();
             utilz.respondWithFileFromPath('.gitignore', myResponse);
             expect(myResponse._statusCode).toBe(0);
-            function checkResponse() {
+            let checkResponse = () => {
                 if (myResponse._statusCode == 0) { setTimeout(checkResponse, 500); }
                 else {
                     expect(myResponse._head['Server']).toBe('server-lite');

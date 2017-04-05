@@ -21,11 +21,11 @@ const config = require('../../lib/sl-config');
 describe('sl-config (Unit)', () => {
     describe('default functionality', () => {
         it('can create a default object', () => {
-            expect(new config()).not.toBe(null);
+            expect(new config()).not.toBeNull();
         });
         it('uses the default output-manager', () => {
             let tmpCfg = new config();
-            expect(tmpCfg.out).not.toBe(null);
+            expect(tmpCfg.out).not.toBeNull();
             expect(tmpCfg.out instanceof require('output-manager').Out).toBe(true);
         });
         it('uses the default https options', () => {

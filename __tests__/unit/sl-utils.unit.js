@@ -57,19 +57,19 @@ describe('sl-utils (Unit)', () => {
     describe('Check buildFromFilePath', () => {
         it('should handle known strings (xml)', () => {
             let tmpCon = utilz.buildFromFilePath('docs/latest/wizard.xml', 'data');
-            expect(tmpCon).not.toBe(null);
+            expect(tmpCon).not.toBeNull();
             expect(tmpCon.type).toBe('application/xml; charset=utf-8');
             expect(tmpCon.length).toBe(4);
         });
         it('should handle known strings (js)', () => {
             let tmpCon = utilz.buildFromFilePath('scripts/raw/fun.min.js', 'data');
-            expect(tmpCon).not.toBe(null);
+            expect(tmpCon).not.toBeNull();
             expect(tmpCon.type).toBe('application/javascript; charset=utf-8');
             expect(tmpCon.length).toBe(4);
         });
         it('should handle unknown strings (boo)', () => {
             let tmpCon = utilz.buildFromFilePath('ghost/says.boo', 'data');
-            expect(tmpCon).not.toBe(null);
+            expect(tmpCon).not.toBeNull();
             expect(tmpCon.type).toBe('application/octet-stream; charset=utf-8');
             expect(tmpCon.length).toBe(4);
         });
@@ -78,7 +78,7 @@ describe('sl-utils (Unit)', () => {
         it('should throw an error when a file does not exist', () => {
             utilz.loadDataFromFile('unreadable.bin').then(
                 () => { throw Error('should not be sucessful'); },
-                (err) => { expect(err).not.toBe(null); },
+                (err) => { expect(err).not.toBeNull(); },
                 () => { throw Error('should not have tried to read it'); });
         });
         it('should be able to load a file', () => {
@@ -130,12 +130,12 @@ describe('sl-utils (Unit)', () => {
         it('should handle good input', () => {
             let myResponse = new Response();
             utilz.writeResponse(myResponse, 200, con.text('say hi'));
-            expect(myResponse._head).not.toBe(null);
+            expect(myResponse._head).not.toBeNull();
             expect(myResponse._head['Server']).toBe('server-lite');
             expect(myResponse._head['Content-Language']).toBe('en');
             expect(myResponse._head['Content-Length']).toBe(6);
             expect(myResponse._head['Content-Type']).toBe('text/plain; charset=utf-8');
-            expect(myResponse._head['Date']).not.toBe(null);
+            expect(myResponse._head['Date']).not.toBeNull();
             expect(myResponse._statusCode).toBe(200);
             expect(myResponse._content).toBe('say hi');
             expect(myResponse._encoding).toBe('utf-8');
@@ -143,12 +143,12 @@ describe('sl-utils (Unit)', () => {
         it('should be able to handle no status', () => {
             let myResponse = new Response();
             utilz.writeResponse(myResponse, null, con.text('say hi'));
-            expect(myResponse._head).not.toBe(null);
+            expect(myResponse._head).not.toBeNull();
             expect(myResponse._head['Server']).toBe('server-lite');
             expect(myResponse._head['Content-Language']).toBe('en');
             expect(myResponse._head['Content-Length']).toBe(6);
             expect(myResponse._head['Content-Type']).toBe('text/plain; charset=utf-8');
-            expect(myResponse._head['Date']).not.toBe(null);
+            expect(myResponse._head['Date']).not.toBeNull();
             expect(myResponse._statusCode).toBe(500);
             expect(myResponse._content).toBe('say hi');
             expect(myResponse._encoding).toBe('utf-8');
@@ -156,12 +156,12 @@ describe('sl-utils (Unit)', () => {
         it('should be able to handle no content', () => {
             let myResponse = new Response();
             utilz.writeResponse(myResponse, 404, null);
-            expect(myResponse._head).not.toBe(null);
+            expect(myResponse._head).not.toBeNull();
             expect(myResponse._head['Server']).toBe('server-lite');
             expect(myResponse._head['Content-Language']).toBe('en');
             expect(myResponse._head['Content-Length']).toBe(19);
             expect(myResponse._head['Content-Type']).toBe('text/plain; charset=utf-8');
-            expect(myResponse._head['Date']).not.toBe(null);
+            expect(myResponse._head['Date']).not.toBeNull();
             expect(myResponse._statusCode).toBe(404);
             expect(myResponse._content).toBe('No content returned');
             expect(myResponse._encoding).toBe('utf-8');

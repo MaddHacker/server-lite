@@ -25,7 +25,7 @@ describe('Content (Unit)', () => {
     describe('Generic binary objects', () => {
         let bin = con.binary(elo);
         it('should not be null', () => {
-            expect(bin).not.toBe(null);
+            expect(bin).not.toBeNull();
         });
         it('should be of type application/octet-stream', () => {
             expect(bin.type).toBe('application/octet-stream' + typeCharset);
@@ -40,7 +40,7 @@ describe('Content (Unit)', () => {
     describe('Generic text objects', () => {
         let txt = con.text(elo);
         it('should not be null', () => {
-            expect(txt).not.toBe(null);
+            expect(txt).not.toBeNull();
         });
         it('should be of type text/plain', () => {
             expect(txt.type).toBe('text/plain' + typeCharset);
@@ -55,7 +55,7 @@ describe('Content (Unit)', () => {
     describe('Generic custom objects', () => {
         let ctm = con.custom('bob/frank', elo);
         it('should not be null', () => {
-            expect(ctm).not.toBe(null);
+            expect(ctm).not.toBeNull();
         });
         it('should be of type bob/frank', () => {
             expect(ctm.type).toBe('bob/frank' + typeCharset);
@@ -70,7 +70,7 @@ describe('Content (Unit)', () => {
     describe('Check find by extension (xml)', () => {
         let xml = con.byExtension('xml', elo);
         it('should not be null', () => {
-            expect(xml).not.toBe(null);
+            expect(xml).not.toBeNull();
         });
         it('should be of type application/xml', () => {
             expect(xml.type).toBe('application/xml' + typeCharset);
@@ -85,7 +85,7 @@ describe('Content (Unit)', () => {
     describe('Check find by extension (js)', () => {
         let js = con.byExtension('js', elo);
         it('should not be null', () => {
-            expect(js).not.toBe(null);
+            expect(js).not.toBeNull();
         });
         it('should be of type application/javascript', () => {
             expect(js.type).toBe('application/javascript' + typeCharset);
@@ -100,7 +100,7 @@ describe('Content (Unit)', () => {
     describe('Check find by extension (css)', () => {
         let css = con.byExtension('css', elo);
         it('should not be null', () => {
-            expect(css).not.toBe(null);
+            expect(css).not.toBeNull();
         });
         it('should be of type text/css', () => {
             expect(css.type).toBe('text/css' + typeCharset);
@@ -117,7 +117,7 @@ describe('Content (Unit)', () => {
     //         let tmp = con.byExtension(ext, elo);
     //         let expectedType = con.mimeTypes[ext];
     //         it(ext + ' should not be null', ()=>{
-    //             expect(tmp).not.toBe(null);
+    //             expect(tmp).not.toBeNull();
     //         });
     //         it(ext + ' should be of type ' + expectedType, ()=>{
     //             expect(tmp.type).toBe(expectedType + typeCharset);

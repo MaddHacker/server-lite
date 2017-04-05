@@ -1,3 +1,6 @@
+# 2017-04-05 - v1.0.0
+- All the documentation...
+
 # 2017-04-05 - v0.9.0
 - Fix `super()` reference bug in `sl-server`
 - Lazy shortcut to set several properties in `sl-handler` constructor

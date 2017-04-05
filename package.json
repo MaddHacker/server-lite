@@ -1,6 +1,6 @@
 {
   "name": "server-lite",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "description": "Lightweight web server for node projects",
   "main": "lib/server-lite.js",
   "scripts": {
@@ -17,7 +17,18 @@
   "keywords": [
     "server",
     "web server",
-    "webserver"
+    "webserver",
+    "SPA",
+    "SPA web server",
+    "SPA webserver",
+    "development webserver",
+    "static file webserver",
+    "concat",
+    "concatenation",
+    "concatenate",
+    "concatenate js",
+    "concatenate javascript",
+    "concatenate css"
   ],
   "author": "MaddHacker <hacker@maddhacker.com> (http://www.maddhacker.com)",
   "license": "Apache-2.0",

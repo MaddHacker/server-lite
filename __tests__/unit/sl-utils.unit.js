@@ -42,6 +42,9 @@ class Response {
     }
 }
 
+const knownFile = '__test/testfile.out';
+const nonexistantFile = '__test/nope.bin'
+
 describe('sl-utils (Unit)', () => {
     describe('Check no output given on construtor', () => {
         it('should use a default implemenation of output-manager when no output given on constructor', () => {
@@ -75,23 +78,29 @@ describe('sl-utils (Unit)', () => {
         });
     });
     describe('Check loadDataFromFile', () => {
-        it('should throw an error when a file does not exist', () => {
-            utilz.loadDataFromFile('unreadable.bin').then(
-                () => { throw Error('should not be sucessful'); },
-                (err) => { expect(err).not.toBeNull(); },
-                () => { throw Error('should not have tried to read it'); });
+        it('should throw an error when a file does not exist', (done) => {
+            utilz.loadDataFromFile(nonexistantFile).then(
+                () => { throw Error('should not be sucessful trying to open ' + nonexistantFile); },
+                (err) => {
+                    expect(err).not.toBeNull();
+                    done();
+                },
+                () => { throw Error('should not have tried to read ' + nonexistantFile); });
         });
-        it('should be able to load a file', () => {
-            utilz.loadDataFromFile('.gitignore').then(
-                (data) => { expect(stringz.startsWith(data, 'node_modules')).toBe(true); },
-                (err) => { throw Error('should not have been able to read or find it'); },
-                (err) => { throw Error('should not have tried to read it'); });
+        it('should be able to load a file', (done) => {
+            utilz.loadDataFromFile(knownFile).then(
+                (data) => {
+                    expect(data.toString('utf8')).toBe('Say hi!');
+                    done();
+                },
+                (err) => { throw Error('should not have been able to read or find ' + knownFile); },
+                (err) => { throw Error('should not have tried to read ' + knownFile); });
         });
     });
     describe('Check respondWithFileFromPath', () => {
         it('should return a 404 when a file does not exist', (done) => {
             let myResponse = new Response();
-            utilz.respondWithFileFromPath('doesnotexist.bin', myResponse);
+            utilz.respondWithFileFromPath(nonexistantFile, myResponse);
             expect(myResponse._statusCode).toBe(0);
             let checkResponse = () => {
                 if (myResponse._statusCode == 0) { setTimeout(checkResponse, 500); }
@@ -109,7 +118,7 @@ describe('sl-utils (Unit)', () => {
         });
         it('should be able to load a file', (done) => {
             let myResponse = new Response();
-            utilz.respondWithFileFromPath('.gitignore', myResponse);
+            utilz.respondWithFileFromPath(knownFile, myResponse);
             expect(myResponse._statusCode).toBe(0);
             let checkResponse = () => {
                 if (myResponse._statusCode == 0) { setTimeout(checkResponse, 500); }
@@ -118,7 +127,7 @@ describe('sl-utils (Unit)', () => {
                     expect(myResponse._head['Content-Language']).toBe('en');
                     expect(myResponse._head['Content-Type']).toBe('application/octet-stream; charset=utf-8');
                     expect(myResponse._statusCode).toBe(200);
-                    expect(stringz.startsWith(myResponse._content.toString('utf8'), 'node_modules')).toBe(true);
+                    expect(myResponse._content.toString('utf8')).toBe('Say hi!');
                     expect(myResponse._encoding).toBe('utf-8');
                     done();
                 }

@@ -17,6 +17,7 @@
 'use strict';
 
 const svr = require('../../lib/sl-server');
+const cfg = require('../../lib/sl-config');
 
 class MockSvr {
     constructor() {
@@ -102,28 +103,34 @@ describe('sl-server (Unit)', () => {
     });
     describe('Check slHttpServer', () => {
         it('should be an instanceof slServer', () => {
-            expect((new svr.slHttp()) instanceof svr.slServer).toBe(true);
+            expect((new svr.http()) instanceof svr.slServer).toBe(true);
         });
-        let tmpSvr = new svr.slHttp();
         it('should use default slConfig', () => {
+            let tmpSvr = new svr.http();
             expect(tmpSvr._config).not.toBeNull();
             expect(tmpSvr._config.listenOptions.port).toBe(5000);
-        });
-        it('should have the server object set to null', () => {
             expect(tmpSvr.server).toBeNull();
+        });
+        it('should use given slConfig', () => {
+            let tmpSvr = new svr.http(new cfg({ port: 1234 }));
+            expect(tmpSvr._config).not.toBeNull();
+            expect(tmpSvr._config.listenOptions.port).toBe(1234);
         });
     });
     describe('Check slHttpsServer', () => {
         it('should be an instanceof slServer', () => {
-            expect((new svr.slHttps()) instanceof svr.slServer).toBe(true);
+            expect((new svr.https()) instanceof svr.slServer).toBe(true);
         });
-        let tmpSvr = new svr.slHttps();
         it('should use default slConfig', () => {
+            let tmpSvr = new svr.https();
             expect(tmpSvr._config).not.toBeNull();
             expect(tmpSvr._config.listenOptions.port).toBe(5000);
-        });
-        it('should have the server object set to null', () => {
             expect(tmpSvr.server).toBeNull();
+        });
+        it('should use given slConfig', () => {
+            let tmpSvr = new svr.https(new cfg({ port: 1234 }));
+            expect(tmpSvr._config).not.toBeNull();
+            expect(tmpSvr._config.listenOptions.port).toBe(1234);
         });
     });
 });

@@ -43,6 +43,12 @@ class Response {
 }
 
 describe('sl-utils (Unit)', () => {
+    describe('Check no output given on construtor', () => {
+        it('should use a default implemenation of output-manager when no output given on constructor', () => {
+            let tmpUtilz = new (require('../../lib/sl-utils'))();
+            expect(tmpUtilz.errStr({ name: 'hi', message: 'bob' })).toBe('hi - bob');
+        });
+    });
     describe('Check errStr', () => {
         it('should return a sensible string', () => {
             expect(utilz.errStr({ name: 'hi', message: 'bob' })).toBe('hi - bob');

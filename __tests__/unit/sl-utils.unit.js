@@ -103,7 +103,7 @@ describe('sl-utils (Unit)', () => {
             utilz.respondWithFileFromPath(nonexistantFile, myResponse);
             expect(myResponse._statusCode).toBe(0);
             let checkResponse = () => {
-                if (myResponse._statusCode == 0) { setTimeout(checkResponse, 500); }
+                if (myResponse._statusCode == 0) { setTimeout(checkResponse, 100); }
                 else {
                     expect(myResponse._head['Server']).toBe('server-lite');
                     expect(myResponse._head['Content-Language']).toBe('en');
@@ -113,7 +113,7 @@ describe('sl-utils (Unit)', () => {
                     expect(myResponse._encoding).toBe('utf-8');
                     done();
                 }
-            }
+            };
             checkResponse();
         });
         it('should be able to load a file', (done) => {
@@ -121,7 +121,7 @@ describe('sl-utils (Unit)', () => {
             utilz.respondWithFileFromPath(knownFile, myResponse);
             expect(myResponse._statusCode).toBe(0);
             let checkResponse = () => {
-                if (myResponse._statusCode == 0) { setTimeout(checkResponse, 500); }
+                if (myResponse._statusCode == 0) { setTimeout(checkResponse, 100); }
                 else {
                     expect(myResponse._head['Server']).toBe('server-lite');
                     expect(myResponse._head['Content-Language']).toBe('en');
@@ -131,7 +131,7 @@ describe('sl-utils (Unit)', () => {
                     expect(myResponse._encoding).toBe('utf-8');
                     done();
                 }
-            }
+            };
             checkResponse();
         });
     });

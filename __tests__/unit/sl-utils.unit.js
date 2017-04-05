@@ -16,12 +16,12 @@
 
 'use strict';
 
-const utilz = require('../../lib/sl-utils');
-const con = require('../../lib/sl-content');
-
 const stringz = require('string-utilz');
 const om = require('output-manager');
 const out = new om.Out();
+
+const con = require('../../lib/sl-content');
+const utilz = new (require('../../lib/sl-utils'))(out);
 
 class Response {
     constructor() {

@@ -1,3 +1,7 @@
+# 2020-03-10 - v1.1.0
+- Update to support MIME type encoding
+- Dependencies update
+
 # 2017-04-05 - v1.0.0
 - All the documentation...
 

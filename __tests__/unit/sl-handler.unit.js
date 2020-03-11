@@ -76,7 +76,7 @@ function checkResp(resp, mime, status, dataStr) {
             else {
                 expect(resp._head['Server']).toBe('server-lite');
                 expect(resp._head['Content-Language']).toBe('en');
-                expect(resp._head['Content-Type']).toBe(mime + '; charset=utf-8');
+                expect(resp._head['Content-Type']).toBe(con.typeString(mime));
                 expect(resp._statusCode).toBe(status);
                 if (dataStr) {
                     expect(resp._content.toString('utf8')).toBe(dataStr);
@@ -84,7 +84,7 @@ function checkResp(resp, mime, status, dataStr) {
                     // probably not string data
                     expect(resp._content).not.toBeNull();
                 }
-                expect(resp._encoding).toBe('utf-8');
+                expect(resp._encoding).toBe(mime.encoding);
                 fulfill();
             }
         };
@@ -184,91 +184,91 @@ describe('sl-handler (Unit)', () => {
         it('should use the index path when path is /', (done) => {
             let resp = new Response();
             handler.simpleFileBasedWebServer(new Request(), resp);
-            checkResp(resp, con.mimeTypes['html'], 200, 'index.html').then(() => { done(); });
+            checkResp(resp, con.mimeTypes.html, 200, 'index.html').then(() => { done(); });
         });
         it('should load the index path when requested', (done) => {
             let resp = new Response();
             handler.simpleFileBasedWebServer(new Request('/html/index.html'), resp);
-            checkResp(resp, con.mimeTypes['html'], 200, 'index.html').then(() => { done(); });
+            checkResp(resp, con.mimeTypes.html, 200, 'index.html').then(() => { done(); });
         });
         it('should load a css file when requested', (done) => {
             let resp = new Response();
             handler.simpleFileBasedWebServer(new Request('/css/main.css'), resp);
-            checkResp(resp, con.mimeTypes['css'], 200, 'main.css').then(() => { done(); });
+            checkResp(resp, con.mimeTypes.css, 200, 'main.css').then(() => { done(); });
         });
         it('should load a js file when requested', (done) => {
             let resp = new Response();
             handler.simpleFileBasedWebServer(new Request('/js/main.js'), resp);
-            checkResp(resp, con.mimeTypes['js'], 200, 'main.js').then(() => { done(); });
+            checkResp(resp, con.mimeTypes.js, 200, 'main.js').then(() => { done(); });
         });
         it('should load a jpg file when requested', (done) => {
             let resp = new Response();
             handler.simpleFileBasedWebServer(new Request('/img/mh.jpg'), resp);
-            checkResp(resp, con.mimeTypes['jpg'], 200, null).then(() => { done(); });
+            checkResp(resp, con.mimeTypes.jpg, 200, null).then(() => { done(); });
         });
     });
     describe('Check concatenatedJavscript', () => {
         it('should return 404 when no files requested', (done) => {
             let resp = new Response();
             handler.concatenatedJavscript(new Request(), resp);
-            checkResp(resp, 'text/plain', 404, 'Requested a concatenated .js file but did not provide files to concat!').then(() => { done(); });
+            checkResp(resp, con.mimeTypes.txt, 404, 'Requested a concatenated .js file but did not provide files to concat!').then(() => { done(); });
         });
         it('should return 404 when no "files" is in query requested', (done) => {
             let resp = new Response();
             handler.concatenatedJavscript(new Request('/concat.js?file=1'), resp);
-            checkResp(resp, 'text/plain', 404, 'Requested a concatenated .js file but did not provide files to concat!').then(() => { done(); });
+            checkResp(resp, con.mimeTypes.txt, 404, 'Requested a concatenated .js file but did not provide files to concat!').then(() => { done(); });
         });
         it('should return 200 when files are requested', (done) => {
             let resp = new Response();
             handler.concatenatedJavscript(new Request('/concat.js?files=1,2'), resp);
-            checkResp(resp, con.mimeTypes['js'], 200, '1.js2.js').then(() => { done(); });
+            checkResp(resp, con.mimeTypes.js, 200, '1.js2.js').then(() => { done(); });
         });
         it('should return files in the order that they are requested', (done) => {
             let resp = new Response();
             handler.concatenatedJavscript(new Request('/concat.js?files=2,1'), resp);
-            checkResp(resp, con.mimeTypes['js'], 200, '2.js1.js').then(() => { done(); });
+            checkResp(resp, con.mimeTypes.js, 200, '2.js1.js').then(() => { done(); });
         });
         it('should return only files that are requested', (done) => {
             let resp = new Response();
             handler.concatenatedJavscript(new Request('/concat.js?files=2'), resp);
-            checkResp(resp, con.mimeTypes['js'], 200, '2.js').then(() => { done(); });
+            checkResp(resp, con.mimeTypes.js, 200, '2.js').then(() => { done(); });
         });
         it('should use an empty string for files not found', (done) => {
             let resp = new Response();
             handler.concatenatedJavscript(new Request('/concat.js?files=3'), resp);
-            checkResp(resp, con.mimeTypes['js'], 200, '').then(() => { done(); });
+            checkResp(resp, con.mimeTypes.js, 200, '').then(() => { done(); });
         });
     });
     describe('Check concatenatedCss', () => {
         it('should return 404 when no files requested', (done) => {
             let resp = new Response();
             handler.concatenatedCss(new Request(), resp);
-            checkResp(resp, 'text/plain', 404, 'Requested a concatenated .css file but did not provide files to concat!').then(() => { done(); });
+            checkResp(resp, con.mimeTypes.txt, 404, 'Requested a concatenated .css file but did not provide files to concat!').then(() => { done(); });
         });
         it('should return 404 when no "files" is in query requested', (done) => {
             let resp = new Response();
             handler.concatenatedCss(new Request('/concat.css?file=1'), resp);
-            checkResp(resp, 'text/plain', 404, 'Requested a concatenated .css file but did not provide files to concat!').then(() => { done(); });
+            checkResp(resp, con.mimeTypes.txt, 404, 'Requested a concatenated .css file but did not provide files to concat!').then(() => { done(); });
         });
         it('should return 200 when files are requested', (done) => {
             let resp = new Response();
             handler.concatenatedCss(new Request('/concat.css?files=1,2'), resp);
-            checkResp(resp, con.mimeTypes['css'], 200, '1.css2.css').then(() => { done(); });
+            checkResp(resp, con.mimeTypes.css, 200, '1.css2.css').then(() => { done(); });
         });
         it('should return files in the order that they are requested', (done) => {
             let resp = new Response();
             handler.concatenatedCss(new Request('/concat.css?files=2,1'), resp);
-            checkResp(resp, con.mimeTypes['css'], 200, '2.css1.css').then(() => { done(); });
+            checkResp(resp, con.mimeTypes.css, 200, '2.css1.css').then(() => { done(); });
         });
         it('should return only files that are requested', (done) => {
             let resp = new Response();
             handler.concatenatedCss(new Request('/concat.css?files=2'), resp);
-            checkResp(resp, con.mimeTypes['css'], 200, '2.css').then(() => { done(); });
+            checkResp(resp, con.mimeTypes.css, 200, '2.css').then(() => { done(); });
         });
         it('should use an empty string for files not found', (done) => {
             let resp = new Response();
             handler.concatenatedCss(new Request('/concat.css?files=3'), resp);
-            checkResp(resp, con.mimeTypes['css'], 200, '').then(() => { done(); });
+            checkResp(resp, con.mimeTypes.css, 200, '').then(() => { done(); });
         });
     });
 });

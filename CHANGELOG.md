@@ -1,4 +1,8 @@
 # 2020-03-10 - v1.1.0
+- Add new `sl-parsed-handler` - still working on functionality
+- Fix all tests from MIME type encoding updates
+
+# 2020-03-10 - v1.1.0
 - Update to support MIME type encoding
 - Dependencies update
 

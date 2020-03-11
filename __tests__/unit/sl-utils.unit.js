@@ -61,19 +61,19 @@ describe('sl-utils (Unit)', () => {
         it('should handle known strings (xml)', () => {
             let tmpCon = utilz.buildFromFilePath('docs/latest/wizard.xml', 'data');
             expect(tmpCon).not.toBeNull();
-            expect(tmpCon.type).toBe('application/xml; charset=utf-8');
+            expect(tmpCon.type).toBe(con.typeString(con.mimeTypes.xml));
             expect(tmpCon.length).toBe(4);
         });
         it('should handle known strings (js)', () => {
             let tmpCon = utilz.buildFromFilePath('scripts/raw/fun.min.js', 'data');
             expect(tmpCon).not.toBeNull();
-            expect(tmpCon.type).toBe('application/javascript; charset=utf-8');
+            expect(tmpCon.type).toBe(con.typeString(con.mimeTypes.js));
             expect(tmpCon.length).toBe(4);
         });
         it('should handle unknown strings (boo)', () => {
             let tmpCon = utilz.buildFromFilePath('ghost/says.boo', 'data');
             expect(tmpCon).not.toBeNull();
-            expect(tmpCon.type).toBe('application/octet-stream; charset=utf-8');
+            expect(tmpCon.type).toBe(con.typeString(con.mimeTypes.bin));
             expect(tmpCon.length).toBe(4);
         });
     });
@@ -107,7 +107,7 @@ describe('sl-utils (Unit)', () => {
                 else {
                     expect(myResponse._head['Server']).toBe('server-lite');
                     expect(myResponse._head['Content-Language']).toBe('en');
-                    expect(myResponse._head['Content-Type']).toBe('text/plain; charset=utf-8');
+                    expect(myResponse._head['Content-Type']).toBe(con.typeString(con.mimeTypes.txt));
                     expect(myResponse._statusCode).toBe(404);
                     expect(stringz.startsWith(myResponse._content, 'File at')).toBe(true);
                     expect(myResponse._encoding).toBe('utf-8');
@@ -125,10 +125,10 @@ describe('sl-utils (Unit)', () => {
                 else {
                     expect(myResponse._head['Server']).toBe('server-lite');
                     expect(myResponse._head['Content-Language']).toBe('en');
-                    expect(myResponse._head['Content-Type']).toBe('application/octet-stream; charset=utf-8');
+                    expect(myResponse._head['Content-Type']).toBe(con.typeString(con.mimeTypes.out));
                     expect(myResponse._statusCode).toBe(200);
                     expect(myResponse._content.toString('utf8')).toBe('Say hi!');
-                    expect(myResponse._encoding).toBe('utf-8');
+                    expect(myResponse._encoding).toBe(con.mimeTypes.out.encoding);
                     done();
                 }
             };
@@ -143,11 +143,11 @@ describe('sl-utils (Unit)', () => {
             expect(myResponse._head['Server']).toBe('server-lite');
             expect(myResponse._head['Content-Language']).toBe('en');
             expect(myResponse._head['Content-Length']).toBe(6);
-            expect(myResponse._head['Content-Type']).toBe('text/plain; charset=utf-8');
+            expect(myResponse._head['Content-Type']).toBe(con.typeString(con.mimeTypes.txt));
             expect(myResponse._head['Date']).not.toBeNull();
             expect(myResponse._statusCode).toBe(200);
             expect(myResponse._content).toBe('say hi');
-            expect(myResponse._encoding).toBe('utf-8');
+            expect(myResponse._encoding).toBe(con.mimeTypes.txt.encoding);
         });
         it('should be able to handle no status', () => {
             let myResponse = new Response();
@@ -156,11 +156,11 @@ describe('sl-utils (Unit)', () => {
             expect(myResponse._head['Server']).toBe('server-lite');
             expect(myResponse._head['Content-Language']).toBe('en');
             expect(myResponse._head['Content-Length']).toBe(6);
-            expect(myResponse._head['Content-Type']).toBe('text/plain; charset=utf-8');
+            expect(myResponse._head['Content-Type']).toBe(con.typeString(con.mimeTypes.txt));
             expect(myResponse._head['Date']).not.toBeNull();
             expect(myResponse._statusCode).toBe(500);
             expect(myResponse._content).toBe('say hi');
-            expect(myResponse._encoding).toBe('utf-8');
+            expect(myResponse._encoding).toBe(con.mimeTypes.txt.encoding);
         });
         it('should be able to handle no content', () => {
             let myResponse = new Response();
@@ -169,11 +169,11 @@ describe('sl-utils (Unit)', () => {
             expect(myResponse._head['Server']).toBe('server-lite');
             expect(myResponse._head['Content-Language']).toBe('en');
             expect(myResponse._head['Content-Length']).toBe(19);
-            expect(myResponse._head['Content-Type']).toBe('text/plain; charset=utf-8');
+            expect(myResponse._head['Content-Type']).toBe(con.typeString(con.mimeTypes.txt));
             expect(myResponse._head['Date']).not.toBeNull();
             expect(myResponse._statusCode).toBe(404);
             expect(myResponse._content).toBe('No content returned');
-            expect(myResponse._encoding).toBe('utf-8');
+            expect(myResponse._encoding).toBe(con.mimeTypes.txt.encoding);
         });
     });
 });

@@ -28,7 +28,7 @@ describe('Content (Unit)', () => {
             expect(bin).not.toBeNull();
         });
         it('should be of type application/octet-stream', () => {
-            expect(bin.type).toBe('application/octet-stream' + typeCharset);
+            expect(bin.type).toBe(con.typeString(con.mimeTypes.bin));
         });
         it('should set value correctly', () => {
             expect(bin.value).toBe(elo);
@@ -43,7 +43,7 @@ describe('Content (Unit)', () => {
             expect(txt).not.toBeNull();
         });
         it('should be of type text/plain', () => {
-            expect(txt.type).toBe('text/plain' + typeCharset);
+            expect(txt.type).toBe(con.typeString(con.mimeTypes.txt));
         });
         it('should set value correctly', () => {
             expect(txt.value).toBe(elo);
@@ -58,7 +58,7 @@ describe('Content (Unit)', () => {
             expect(ctm).not.toBeNull();
         });
         it('should be of type bob/frank', () => {
-            expect(ctm.type).toBe('bob/frank' + typeCharset);
+            expect(ctm.type).toBe('bob/frank');
         });
         it('should set value correctly', () => {
             expect(ctm.value).toBe(elo);
@@ -73,7 +73,7 @@ describe('Content (Unit)', () => {
             expect(xml).not.toBeNull();
         });
         it('should be of type application/xml', () => {
-            expect(xml.type).toBe('application/xml' + typeCharset);
+            expect(xml.type).toBe(con.typeString(con.mimeTypes.xml));
         });
         it('should set value correctly', () => {
             expect(xml.value).toBe(elo);
@@ -88,7 +88,7 @@ describe('Content (Unit)', () => {
             expect(js).not.toBeNull();
         });
         it('should be of type application/javascript', () => {
-            expect(js.type).toBe('application/javascript' + typeCharset);
+            expect(js.type).toBe(con.typeString(con.mimeTypes.js));
         });
         it('should set value correctly', () => {
             expect(js.value).toBe(elo);
@@ -103,7 +103,7 @@ describe('Content (Unit)', () => {
             expect(css).not.toBeNull();
         });
         it('should be of type text/css', () => {
-            expect(css.type).toBe('text/css' + typeCharset);
+            expect(css.type).toBe(con.typeString(con.mimeTypes.css));
         });
         it('should set value correctly', () => {
             expect(css.value).toBe(elo);
@@ -120,7 +120,7 @@ describe('Content (Unit)', () => {
                 expect(tmp).not.toBeNull();
             });
             it(ext + ' should be of type ' + expectedType, () => {
-                expect(tmp.type).toBe(expectedType + typeCharset);
+                expect(tmp.type).toBe(con.typeString(expectedType));
             });
             it(ext + ' should set value correctly', () => {
                 expect(tmp.value).toBe(elo);

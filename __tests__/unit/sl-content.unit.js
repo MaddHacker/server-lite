@@ -18,39 +18,41 @@
 
 const con = require('../../lib/sl-content');
 
-const typeCharset = '; charset=utf-8';
 const elo = 'hello';
+
+const om = require('output-manager');
+const out = new om.Out();
+
+function checkObjectInfo(tmpContent, baseType, qualifier = 'it', value = elo) {
+    it(qualifier + ' should not be null', () => {
+        expect(tmpContent).not.toBeNull();
+    });
+    it(qualifier + ' should be of correct type', () => {
+        expect(tmpContent.type).toBe(con.typeString(baseType));
+    });
+    it(qualifier + ' should set the value correctly', () => {
+        expect(tmpContent.value).toBe(value);
+    });
+    it(qualifier + ' should have the correct length', () => {
+        expect(tmpContent.length).toBe(value.length);
+    });
+};
 
 describe('Content (Unit)', () => {
     describe('Generic binary objects', () => {
-        let bin = con.binary(elo);
-        it('should not be null', () => {
-            expect(bin).not.toBeNull();
-        });
-        it('should be of type application/octet-stream', () => {
-            expect(bin.type).toBe(con.typeString(con.mimeTypes.bin));
-        });
-        it('should set value correctly', () => {
-            expect(bin.value).toBe(elo);
-        });
-        it('should have correct length', () => {
-            expect(bin.length).toBe(elo.length);
-        });
+        checkObjectInfo(con.binary(elo), con.mimeTypes.bin);
     });
     describe('Generic text objects', () => {
-        let txt = con.text(elo);
-        it('should not be null', () => {
-            expect(txt).not.toBeNull();
-        });
-        it('should be of type text/plain', () => {
-            expect(txt.type).toBe(con.typeString(con.mimeTypes.txt));
-        });
-        it('should set value correctly', () => {
-            expect(txt.value).toBe(elo);
-        });
-        it('should have correct length', () => {
-            expect(txt.length).toBe(elo.length);
-        });
+        checkObjectInfo(con.text(elo), con.mimeTypes.txt);
+    });
+    describe('Generic html objects', () => {
+        checkObjectInfo(con.html(elo), con.mimeTypes.html);
+    });
+    describe('Generic json objects', () => {
+        checkObjectInfo(con.json(elo), con.mimeTypes.json);
+    });
+    describe('Generic xml objects', () => {
+        checkObjectInfo(con.xml(elo), con.mimeTypes.xml);
     });
     describe('Generic custom objects', () => {
         let ctm = con.custom('bob/frank', elo);
@@ -68,66 +70,17 @@ describe('Content (Unit)', () => {
         });
     });
     describe('Check find by extension (xml)', () => {
-        let xml = con.byExtension('xml', elo);
-        it('should not be null', () => {
-            expect(xml).not.toBeNull();
-        });
-        it('should be of type application/xml', () => {
-            expect(xml.type).toBe(con.typeString(con.mimeTypes.xml));
-        });
-        it('should set value correctly', () => {
-            expect(xml.value).toBe(elo);
-        });
-        it('should have correct length', () => {
-            expect(xml.length).toBe(elo.length);
-        });
+        checkObjectInfo(con.byExtension('xml', elo), con.mimeTypes.xml);
     });
     describe('Check find by extension (js)', () => {
-        let js = con.byExtension('js', elo);
-        it('should not be null', () => {
-            expect(js).not.toBeNull();
-        });
-        it('should be of type application/javascript', () => {
-            expect(js.type).toBe(con.typeString(con.mimeTypes.js));
-        });
-        it('should set value correctly', () => {
-            expect(js.value).toBe(elo);
-        });
-        it('should have correct length', () => {
-            expect(js.length).toBe(elo.length);
-        });
+        checkObjectInfo(con.byExtension('js', elo), con.mimeTypes.js);
     });
     describe('Check find by extension (css)', () => {
-        let css = con.byExtension('css', elo);
-        it('should not be null', () => {
-            expect(css).not.toBeNull();
-        });
-        it('should be of type text/css', () => {
-            expect(css.type).toBe(con.typeString(con.mimeTypes.css));
-        });
-        it('should set value correctly', () => {
-            expect(css.value).toBe(elo);
-        });
-        it('should have correct length', () => {
-            expect(css.length).toBe(elo.length);
-        });
+        checkObjectInfo(con.byExtension('css', elo), con.mimeTypes.css);
     });
     describe('Check all extensions', () => {
         for (let ext in con.mimeTypes) {
-            let tmp = con.byExtension(ext, elo);
-            let expectedType = con.mimeTypes[ext];
-            it(ext + ' should not be null', () => {
-                expect(tmp).not.toBeNull();
-            });
-            it(ext + ' should be of type ' + expectedType, () => {
-                expect(tmp.type).toBe(con.typeString(expectedType));
-            });
-            it(ext + ' should set value correctly', () => {
-                expect(tmp.value).toBe(elo);
-            });
-            it(ext + ' should have correct length', () => {
-                expect(tmp.length).toBe(elo.length);
-            });
+            checkObjectInfo(con.byExtension(ext, elo), con.mimeTypes[ext], ext);
         }
     });
 });

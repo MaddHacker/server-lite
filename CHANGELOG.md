@@ -1,4 +1,8 @@
 # 2020-03-17 - v1.5.0
+- Rework `sl-markup` with non-backwards compatible changes.
+- Add ability to process js statements inside templates.
+
+# 2020-03-17 - v1.5.0
 - Add new `sl-markup` - templating engine for js.
 - Additional tests and coverage to support new functionality
 - Update [README.md](README.md)

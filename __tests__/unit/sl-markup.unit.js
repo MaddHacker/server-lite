@@ -32,7 +32,7 @@ const variableTemplatePre =
     '<!DOCTYPE html><html lang="en-US"><head><meta charset="UTF-8" /><title>'
 const variableTemplatePost = '</title></head><body><h1>Hello Markup</h1></body></html>';
 
-const variableTemplate = variableTemplatePre + '%{title}' + variableTemplatePost;
+const variableTemplate = variableTemplatePre + '<% title %>' + variableTemplatePost;
 const variableResult = (value) => { return variableTemplatePre + value + variableTemplatePost; }
 
 describe('sl-markup (Unit)', () => {
@@ -84,19 +84,19 @@ describe('sl-markup (Unit)', () => {
         });
         it('replaces the same variable twice', () => {
             let tmpTitle = 'Hello Markup';
-            let result = markup.buildFromTemplate(variableTemplate + '%{title}', { title: tmpTitle });
+            let result = markup.buildFromTemplate(variableTemplate + '<% title %>', { title: tmpTitle });
             expect(result).not.toBeNull();
             expect(result).toBe(variableResult(tmpTitle) + tmpTitle);
         });
         it('replaces multiple variables', () => {
             let tmpTitle = 'Hello Markup';
-            let result = markup.buildFromTemplate(variableTemplate + '%{title}-%{foo}-%{bar}', { title: tmpTitle, foo: 'foo', bar: 'bar' });
+            let result = markup.buildFromTemplate(variableTemplate + '<%title%>-<% foo%>-<%bar %>', { title: tmpTitle, foo: 'foo', bar: 'bar' });
             expect(result).not.toBeNull();
             expect(result).toBe(variableResult(tmpTitle) + tmpTitle + '-foo-bar');
         });
     });
     describe('partial inclusion', () => {
-        const partialMarkup = new slMarkup(utilz, { title: 'My Cool Title' }, testTemplateRoot);
+        const partialMarkup = new slMarkup(utilz, { title: 'My Cool Title', letterArray: "['a', 'b', 'c', 'd', 'e']" }, testTemplateRoot);
         let output = '';
         it('can load and process a partial', (done) => {
             expect(partialMarkup).not.toBeNull();
@@ -106,6 +106,8 @@ describe('sl-markup (Unit)', () => {
                     output = partialMarkup.buildFromFileWithPartials(testHtmlRoot + '/markup-index.html');
                     expect(output).not.toBeNull();
                     expect(output.length > 0).toBeTruthy();
+
+                    out.d('output: ' + output);
 
                     done();
                 }
@@ -122,5 +124,16 @@ describe('sl-markup (Unit)', () => {
 
         it('has the correct body', () => { expect(stringUtilz.containsIgnoreCase(output, '<h1>Hello Markup</h1>')).toBeTruthy(); });
 
+        it('processed a non-variable expression', () => {
+            let outputStr = [1, 2, 3, 4, 5].map(v => '<h3>' + v + '</h3>').join(' ');
+            out.d('checking for output: ' + outputStr);
+            expect(stringUtilz.containsIgnoreCase(output, outputStr)).toBeTruthy();
+        });
+
+        it('processed a variable expression', () => {
+            let outputStr = ['a', 'b', 'c', 'd', 'e'].map(v => '<h3>' + v + '</h3>').join(' ');
+            out.d('checking for output: ' + outputStr);
+            expect(stringUtilz.containsIgnoreCase(output, outputStr)).toBeTruthy();
+        });
     });
 });

@@ -157,8 +157,22 @@ The `markup` object allows for templated `.html` files.  The object takes a fold
 
 ### Template files
 Template files are standard `.html` files, with special markup.
-- `%{foo}` => will look for the property `foo` in the `mappedVars` or `defaultValues` arrays.  If the value is set in the `defaultValues`, it can be overridden by the `mappedVars`
-- `%{= tmp/foo/bar}` => uses the provided `templateRootFolder` as the base path, and then appends these values (and `.html`) to the base path.
+- `<%foo%>` => will look for the property `foo` in the `mappedVars` or `defaultValues` arrays.  If the value is set in the `defaultValues`, it can be overridden by the `mappedVars`
+- `<%= tmp/foo/bar %>` => uses the provided `templateRootFolder` as the base path, and then appends these values (and `.html`) to the base path.
+- Inside of the templates, js can be executed.  This allows for small inline configurations.  Additionally, variables can be passed into those snippets, using the `%{foo}` syntax.  Some examples of this:
+
+### `index.html`
+```
+<%= [1,2,3,4,5].map(v => '<h3>' + v + '</h3>').join(' '); %>
+<%= %{letterArray}.map(v => '<h3>' + v + '</h3>').join(' '); %>
+```
+### `renderer.js`
+```
+const partialMarkup = new slMarkup(utilz, { title: 'My Cool Title', letterArray: "['a', 'b', 'c', 'd', 'e']" }, templateRoot);
+output = partialMarkup.buildFromFileWithPartials(htmlRootFolder + '/index.html');
+```
+
+***IT IS IMPORTANT TO NOTE*** the array must be passed as a string literal, as the entire thing is handled as a string literal until it is processed.
 
 # Things to remember
 - Everything is assumed to be `utf-8` or `utf8`

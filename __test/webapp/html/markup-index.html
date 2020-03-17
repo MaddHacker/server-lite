@@ -1,5 +1,9 @@
-%{= core/_header}
+<%& core/_header %>
 
-<body>%{= _markup-index}</body>
+<body><%& _markup-index %></body>
 
-%{= core/_footer}
+<%= [1,2,3,4,5].map(v => '<h3>' + v + '</h3>').join(' '); %>
+
+<%= %{letterArray}.map(v => '<h3>' + v + '</h3>').join(' '); %>
+
+<%& core/_footer %>

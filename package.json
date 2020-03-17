@@ -1,6 +1,6 @@
 {
   "name": "server-lite",
-  "version": "1.5.0",
+  "version": "2.0.0",
   "description": "Lightweight web server for node projects",
   "main": "lib/server-lite.js",
   "scripts": {
@@ -28,7 +28,9 @@
     "concatenate",
     "concatenate js",
     "concatenate javascript",
-    "concatenate css"
+    "concatenate css",
+    "html templates",
+    "templating engine"
   ],
   "author": "MaddHacker <hacker@maddhacker.com> (http://www.maddhacker.com)",
   "contributors": [

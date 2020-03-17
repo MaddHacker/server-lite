@@ -16,14 +16,12 @@
 
 'use strict';
 
-/**
- * Main class that accumulates all the components into a single export.
- */
-module.exports = {
-    config: require('./sl-config'),
-    content: require('./sl-content'),
-    handler: require('./sl-handler'),
-    server: require('./sl-server'),
-    utils: require('./sl-utils'),
-    markup: require('./sl-markup')
-};
+const config = require('../../lib/sl-markup');
+
+describe('sl-markup (Integration)', () => {
+    describe('TBD', () => {
+        it('no integration tests needed yet', () => {
+            expect(true).toBe(true);
+        });
+    });
+});

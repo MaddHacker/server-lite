@@ -150,6 +150,16 @@ const out = new (require('output-manager').Out()); // setup your output manager
 const utilz = new sl.utils(out);
 ```
 
+## `markup`
+The `markup` object allows for templated `.html` files.  The object takes a folder location and a set of default variables that can be replaced.  Each file that should be loaded can be passed and the code will either process the file or process an arbitrary template.  This is done with:
+- `buildFromTemplate` => given a template `{String}` will replace all values with the provided `{Object}` values
+- `buildFromFileWithPartials` => given a file path, will recursively parse each include statement and add the appropriate files.
+
+### Template files
+Template files are standard `.html` files, with special markup.
+- `%{foo}` => will look for the property `foo` in the `mappedVars` or `defaultValues` arrays.  If the value is set in the `defaultValues`, it can be overridden by the `mappedVars`
+- `%{= tmp/foo/bar}` => uses the provided `templateRootFolder` as the base path, and then appends these values (and `.html`) to the base path.
+
 # Things to remember
 - Everything is assumed to be `utf-8` or `utf8`
 

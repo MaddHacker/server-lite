@@ -1,4 +1,9 @@
-# 2020-03-10 - v1.1.0
+# 2020-03-17 - v1.5.0
+- Add new `sl-markup` - templating engine for js.
+- Additional tests and coverage to support new functionality
+- Update [README.md](README.md)
+
+# 2020-03-10 - v1.2.0
 - Add new `sl-parsed-handler` - still working on functionality
 - Fix all tests from MIME type encoding updates
 
